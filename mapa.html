@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Organigrama Tokken Security</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem;
+      font-family: "Myriad Pro", "Segoe UI", Arial, sans-serif;
+      background: #f5f7fb;
+      color: #102a43;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-family: "Avant Garde", "Century Gothic", Arial, sans-serif;
+      color: #0b3c5d;
+      letter-spacing: .05em;
+      font-size: 1.4rem;
+    }
+
+    /* ---------- ÁRBOL BÁSICO ---------- */
+
+    .tree {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 2rem;
+    }
+
+    .tree ul {
+      padding-top: 20px;
+      position: relative;
+      padding-left: 0;
+      white-space: nowrap;
+    }
+
+    .tree li {
+      list-style-type: none;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      padding: 20px 5px 0 5px;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    /* líneas horizontales arriba de cada li */
+    .tree li::before,
+    .tree li::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      border-top: 2px solid #0b3c5d;
+      width: 50%;
+      height: 20px;
+    }
+
+    .tree li::before {
+      right: 50%;
+    }
+
+    .tree li::after {
+      left: 50%;
+      border-left: 2px solid #0b3c5d;
+    }
+
+    /* solo hijo: sin líneas */
+    .tree li:only-child::before,
+    .tree li:only-child::after {
+      display: none;
+    }
+
+    .tree li:only-child {
+      padding-top: 0;
+    }
+
+    /* primer y último hijo: quitar sobrantes */
+    .tree li:first-child::before,
+    .tree li:last-child::after {
+      border: 0 none;
+    }
+
+    .tree li:last-child::before {
+      border-right: 2px solid #0b3c5d;
+    }
+
+    .tree li:first-child::after {
+      border-left: 2px solid #0b3c5d;
+    }
+
+    /* línea vertical que baja hacia los hijos */
+    .tree ul ul::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border-left: 2px solid #0b3c5d;
+      width: 0;
+      height: 20px;
+    }
+
+    /* ---------- CAJAS ---------- */
+
+    .box {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: .7rem .9rem;
+      min-width: 190px;
+      max-width: 230px;
+      text-align: center;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.12);
+      border: 2px solid #0b3c5d10;
+      display: inline-block;
+      white-space: normal;
+    }
+
+    .box h3 {
+      margin: 0 0 .25rem 0;
+      font-size: .9rem;
+      font-family: "Avant Garde", "Century Gothic", Arial, sans-serif;
+      color: #0b3c5d;
+    }
+
+    .box span {
+      display: block;
+      font-size: .75rem;
+      color: #4b5563;
+    }
+
+    /* Tokken arriba */
+    .box.company {
+      background: linear-gradient(135deg, #0b3c5d, #127c56);
+      color: #ffffff;
+      border: none;
+    }
+
+    .box.company h3,
+    .box.company span {
+      color: #ffffff;
+    }
+
+    /* nivel inmediato a Tokken (CEO y Subgerencia) */
+    .box.level1 {
+      background: #0b3c5d;
+      color: #ffffff;
+      border: none;
+    }
+
+    .box.level1 h3,
+    .box.level1 span {
+      color: #ffffff;
+    }
+
+    /* directores / coordinaciones principales */
+    .box.level2.ceo-side {
+      border-left: 4px solid #1f6fb2;
+    }
+
+    .box.level2.sub-side {
+      border-left: 4px solid #278f3f;
+    }
+
+    /* cargos de nivel bajo */
+    .box.level3 {
+      background: #f9fafb;
+    }
+
+    @media (max-width: 700px) {
+      body {
+        padding: 1rem .5rem;
+      }
+      .box {
+        min-width: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Organigrama Tokken Security – Cargos</h1>
+
+  <div class="tree">
+    <ul>
+      <li>
+        <!-- Nivel 0: Empresa -->
+        <div class="box company">
+          <h3>Tokken Security Co. Ltda.</h3>
+          <span>Estructura organizacional 2025</span>
+        </div>
+
+        <ul>
+          <!-- Nivel 1: Gerencia general (CEO) -->
+          <li>
+            <div class="box level1">
+              <h3>Gerencia General (CEO)</h3>
+              <span>Máxima autoridad de la organización</span>
+            </div>
+
+            <ul>
+              <!-- Dirección Financiera – PSO -->
+              <li>
+                <div class="box level2 ceo-side">
+                  <h3>Dirección Financiera – PSO</h3>
+                </div>
+                <ul>
+                  <li>
+                    <div class="box level3">
+                      <h3>Gerencia Administrativa – PSO</h3>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="box level3">
+                          <h3>Asistencia Administrativa – PSO</h3>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Gerencia de Nómina – PSO</h3>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="box level3">
+                          <h3>Senior Nómina – PSO</h3>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Contaduría – PSO</h3>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="box level3">
+                          <h3>Contaduría Senior – PSO</h3>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- Coordinación de Tecnología -->
+              <li>
+                <div class="box level2 ceo-side">
+                  <h3>Coordinación de Tecnología</h3>
+                </div>
+              </li>
+
+              <!-- Dirección Comercial -->
+              <li>
+                <div class="box level2 ceo-side">
+                  <h3>Dirección Comercial</h3>
+                </div>
+                <ul>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultoría Inbound Marketing y SEO – PSO</h3>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- Dirección de Operaciones -->
+              <li>
+                <div class="box level2 ceo-side">
+                  <h3>Dirección de Operaciones</h3>
+                </div>
+                <ul>
+                  <li>
+                    <div class="box level3">
+                      <h3>Coordinación de Operaciones Jr.</h3>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="box level3">
+                          <h3>Supervisores de Servicio</h3>
+                        </div>
+                        <ul>
+                          <li>
+                            <div class="box level3">
+                              <h3>Coordinadores / Supervisores de Puesto</h3>
+                            </div>
+                            <ul>
+                              <li>
+                                <div class="box level3">
+                                  <h3>OMT’s</h3>
+                                </div>
+                                <ul>
+                                  <li>
+                                    <div class="box level3">
+                                      <h3>Oficiales / Guardas de Seguridad</h3>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- Dirección de Consultoría -->
+              <li>
+                <div class="box level2 ceo-side">
+                  <h3>Dirección de Consultoría</h3>
+                </div>
+                <ul>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultor / Consultoría especializada</h3>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Nivel 1: Subgerencia -->
+          <li>
+            <div class="box level1">
+              <h3>Subgerencia</h3>
+              <span>Dir. Talento Humano y Cultura Organizacional<br>
+                    y Dir. Administrativa y de Sistemas de Gestión</span>
+            </div>
+
+            <ul>
+              <!-- Dirección de Talento Humano y Cultura Organizacional -->
+              <li>
+                <div class="box level2 sub-side">
+                  <h3>Dirección de Talento Humano y Cultura Organizacional</h3>
+                </div>
+                <ul>
+                  <li>
+                    <div class="box level3">
+                      <h3>Coordinación de Talento Humano y Cultura Organizacional</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Coordinación de Campus Virtual</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Coordinación de Comunicación Interna<br>y Contenido Digital</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultoría Legal Laboral – PSO</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultoría E-Learning – PSO</h3>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- Dirección Administrativa y de Sistemas de Gestión -->
+              <li>
+                <div class="box level2 sub-side">
+                  <h3>Dirección Administrativa y de Sistemas de Gestión</h3>
+                </div>
+                <ul>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultoría Responsable SG-SST – PSO</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultoría en Protección de Datos – PSO</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Consultoría en Gestión Documental – PSO</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Oficina de Cumplimiento SARLAFT y PTEE – PSO</h3>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="box level3">
+                      <h3>Auxiliar de Servicios Generales – PSO</h3>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
